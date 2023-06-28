@@ -23,7 +23,7 @@ Command | Description | Permission
 - [X] Configurable
 - [ ] Save Kills, Wins, Goals in Database
 
-#Copyright
+## Copyright
 Thanks to [Shandy](https://github.com/SandhyR) for letting me go ahead and modify this open source.
 
 This is a continuation of the open source development of [this project](https://github.com/SandhyR/TheBridge), don't forget to star and feedback, we always appreciate your suggestions and feedback
