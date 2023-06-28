@@ -246,14 +246,6 @@ class Game
     }
 
     /**
-     * @return void
-     */
-    public function resetRestartCountdown(): void
-    {
-        $this->restartcountdown = 10;
-    }
-
-    /**
      * @return bool
      */
     public function hasCage(): bool
@@ -401,7 +393,13 @@ class Game
      */
     public function removePlayer(Player $player): void
     {
-        unset($this->players[strtolower($player->getName())], $this->teams[strtolower($player->getName())]);
+
+        // fix isu crash on restart, remove this condition if you dont need count of goal
+        if ($this->phase !== self::PHASE_RESTARTING && $this->phase !== self::PHASE_RUNNING) {
+            unset($this->teams[strtolower($player->getName())]);
+        }
+
+        unset($this->players[strtolower($player->getName())]);
         $this->checkCountdown();
     }
 
@@ -415,7 +413,7 @@ class Game
             $this->task->getHandler()->cancel();
         }
 
-        $world =Server::getInstance()->getWorldManager()->getWorldByName($this->arenainfo["worldname"]);
+        $world = Server::getInstance()->getWorldManager()->getWorldByName($this->arenainfo["worldname"]);
         //remove all placed block
         foreach ($this->placedblock as $pos) {
             $world->setBlock($pos, VanillaBlocks::AIR());
@@ -423,7 +421,7 @@ class Game
 
         //remove drop item
         foreach ($world->getEntities() as $entity) {
-            if($entity instanceof ItemEntity) {
+            if ($entity instanceof ItemEntity) {
                 $entity->close();
             }
         }
@@ -443,6 +441,8 @@ class Game
         $this->players = [];
         $this->playerinfo = [];
         $this->timer = 900;
+        $this->countdown = 15;
+        $this->restartcountdown = 10;
         $this->scoredname = null;
     }
 
@@ -489,9 +489,8 @@ class Game
             }
             if ($this->phase == Game::PHASE_RUNNING) {
                 foreach ($this->players as $player) {
-                    $player->sendTitle(TextFormat::GOLD . TextFormat::BOLD . "VICTORY!");
+                    $this->sendVictory($player);
                 }
-                $this->restart();
             }
         }
     }

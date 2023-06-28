@@ -23,6 +23,13 @@ Command | Description | Permission
 - [X] Configurable
 - [ ] Save Kills, Wins, Goals in Database
 
+## Issue FIX
+- [X] Drop item not remove after game
+- [x] Error after player quit int RUNNING and RESTART state
+- [x] Lobby countdown not reset after game restarting
+If you found issue, please open new issue in GitHub repository
+
+
 ## Copyright
 Thanks to [Shandy](https://github.com/SandhyR) for letting me go ahead and modify this open source.
 

@@ -32,7 +32,6 @@ class GameListener implements Listener
     public function onQuit(PlayerQuitEvent $event) : void
     {
         $player = $event->getPlayer();
-        ScoreFactory::removeObjective($player);
         $this->game->broadcastCustomMessage(TextFormat::RED . $player->getName() . " disconnected!");
         $this->game->removePlayer($player);
     }

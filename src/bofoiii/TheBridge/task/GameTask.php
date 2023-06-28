@@ -127,7 +127,6 @@ class GameTask extends Task
                 }
                 $this->game->decrementtRestartCountdown();
                 if ($this->game->getRestartCountdown() <= 0) {
-                    $this->game->resetRestartCountdown();
                     $game = 0;
                     foreach (TheBridge::getInstance()->getGames() as $games) {
                         if ($games->isRunning()) {
