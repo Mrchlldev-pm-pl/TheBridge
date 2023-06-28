@@ -1,6 +1,6 @@
 <?php
 
-namespace SandhyR\TheBridge\command\subcommands;
+namespace bofoiii\TheBridge\command\subcommands;
 
 use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\BaseSubCommand;

@@ -1,12 +1,12 @@
 <?php
 
-namespace SandhyR\TheBridge\command\subcommands;
+namespace bofoiii\TheBridge\command\subcommands;
 
 use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\BaseSubCommand;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
-use SandhyR\TheBridge\TheBridge;
+use bofoiii\TheBridge\TheBridge;
 
 class JoinSubCommand extends BaseSubCommand{
 

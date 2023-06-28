@@ -1,19 +1,19 @@
 <?php
 
-namespace SandhyR\TheBridge\command;
+namespace bofoiii\TheBridge\command;
 
 use CortexPE\Commando\BaseCommand;
 use pocketmine\command\CommandSender;
-use SandhyR\TheBridge\command\subcommands\CreateSubCommand;
-use SandhyR\TheBridge\command\subcommands\HelpSubCommand;
-use SandhyR\TheBridge\command\subcommands\JoinSubCommand;
-use SandhyR\TheBridge\command\subcommands\QuitSubCommand;
-use SandhyR\TheBridge\command\subcommands\RandomJoinSubCommand;
-use SandhyR\TheBridge\command\subcommands\ReloadSubCommand;
-use SandhyR\TheBridge\command\subcommands\SetGoalSubCommand;
-use SandhyR\TheBridge\command\subcommands\SetHubSubCommand;
-use SandhyR\TheBridge\command\subcommands\SetSpawnSubCommand;
-use SandhyR\TheBridge\command\subcommands\SetWorldSubCommand;
+use bofoiii\TheBridge\command\subcommands\CreateSubCommand;
+use bofoiii\TheBridge\command\subcommands\HelpSubCommand;
+use bofoiii\TheBridge\command\subcommands\JoinSubCommand;
+use bofoiii\TheBridge\command\subcommands\QuitSubCommand;
+use bofoiii\TheBridge\command\subcommands\RandomJoinSubCommand;
+use bofoiii\TheBridge\command\subcommands\ReloadSubCommand;
+use bofoiii\TheBridge\command\subcommands\SetGoalSubCommand;
+use bofoiii\TheBridge\command\subcommands\SetHubSubCommand;
+use bofoiii\TheBridge\command\subcommands\SetSpawnSubCommand;
+use bofoiii\TheBridge\command\subcommands\SetWorldSubCommand;
 
 class TheBridgeCommand extends BaseCommand{
 
@@ -29,6 +29,12 @@ class TheBridgeCommand extends BaseCommand{
         $this->registerSubCommand(new ReloadSubCommand("reload", "Reload arenas"));
         $this->registerSubCommand(new QuitSubCommand("quit", "Quit from arena"));
         $this->registerSubCommand(new SetHubSubCommand("sethub", "Set hub arena"));
+        $this->setPermission($this->getPermission());
+    }
+
+    public function getPermission()
+    {
+        return "thebridge.permission.cmd";
     }
 
     /**

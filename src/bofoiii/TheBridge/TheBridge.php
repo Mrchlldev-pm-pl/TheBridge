@@ -1,15 +1,16 @@
 <?php
 
-namespace SandhyR\TheBridge;
+namespace bofoiii\TheBridge;
 
 use CortexPE\Commando\PacketHooker;
 use pocketmine\plugin\PluginBase;
 use pocketmine\player\Player;
-use SandhyR\TheBridge\command\TheBridgeCommand;
-use SandhyR\TheBridge\game\Game;
-use SandhyR\TheBridge\utils\Utils;
+use bofoiii\TheBridge\command\TheBridgeCommand;
+use bofoiii\TheBridge\game\Game;
+use bofoiii\TheBridge\utils\Utils;
 
-class TheBridge extends PluginBase{
+class TheBridge extends PluginBase
+{
 
     /** @var TheBridge */
     private static TheBridge $instance;
@@ -18,7 +19,8 @@ class TheBridge extends PluginBase{
     private array $game = [];
 
     /** @return TheBridge */
-    public static function getInstance(): TheBridge{
+    public static function getInstance(): TheBridge
+    {
         return self::$instance;
     }
 
@@ -34,25 +36,29 @@ class TheBridge extends PluginBase{
         }
         $this->saveDefaultConfig();
         @mkdir($this->getDataFolder() . "arenas/");
-        $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
         $this->getServer()->getCommandMap()->register("thebridge", new TheBridgeCommand($this, "thebridge", "TheBridge Command", ["tb"]));
         foreach (glob($this->getDataFolder() . "arenas/*.json") as $location) {
             $fileContents = file_get_contents($location);
             $json = json_decode($fileContents, true);
-            $worldname = explode(":" ,$json["hub"]);
-            if($worldname !== null) {
+            $worldname = explode(":", $json["hub"]);
+            if ($worldname !== null) {
                 $this->getServer()->getWorldManager()->loadWorld($worldname[3]);
             }
-            $this->game[$json["arenaname"]] = new Game(Utils::stringToVector(":", $json["bluespawn"]), Utils::stringToVector(":", $json["redspawn"]), Utils::stringToVector(":", $json["bluegoal"]), Utils::stringToVector(":", $json["redgoal"]), $json["worldname"], $json["arenaname"], Utils::stringToPosition($json["hub"]));
-            if(is_string($json["worldname"])) {
+
+            if (is_string($json["worldname"])) {
                 $this->getServer()->getWorldManager()->loadWorld($json["worldname"]);
+                var_dump($json["worldname"]);
             }
+
+            $this->game[$json["arenaname"]] = new Game(Utils::stringToVector(":", $json["bluespawn"]), Utils::stringToVector(":", $json["redspawn"]), Utils::stringToVector(":", $json["bluegoal"]), Utils::stringToVector(":", $json["redgoal"]), $json["worldname"], $json["arenaname"], Utils::stringToPosition($json["hub"]));
+            
+            
         }
     }
 
     protected function onDisable(): void
     {
-        foreach ($this->getGames() as $game){
+        foreach ($this->getGames() as $game) {
             $game->stop();
         }
     }
@@ -61,8 +67,9 @@ class TheBridge extends PluginBase{
      * @param string $arena
      * @return bool
      */
-    public function createArena(string $arena): bool{
-        if($this->getGame($arena) !== null){
+    public function createArena(string $arena): bool
+    {
+        if ($this->getGame($arena) !== null) {
             return false;
         }
         $this->game[$arena] = new Game(arenaname: $arena);
@@ -73,12 +80,14 @@ class TheBridge extends PluginBase{
      * @param string $name
      * @return Game|null
      */
-    public function getGame(string $name): ?Game{
+    public function getGame(string $name): ?Game
+    {
         return $this->game[$name] ?? null;
     }
 
     /** @return Game[] */
-    public function getGames(): array{
+    public function getGames(): array
+    {
         return $this->game;
     }
 
@@ -86,9 +95,10 @@ class TheBridge extends PluginBase{
      * @param Player $player
      * @return Game|null
      */
-    public function getPlayerGame(Player $player): ?Game{
-        foreach ($this->getGames() as $game){
-            if($game->isInGame($player)){
+    public function getPlayerGame(Player $player): ?Game
+    {
+        foreach ($this->getGames() as $game) {
+            if ($game->isInGame($player)) {
                 return $game;
             }
         }

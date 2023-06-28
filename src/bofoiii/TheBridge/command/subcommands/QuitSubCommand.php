@@ -1,6 +1,6 @@
 <?php
 
-namespace SandhyR\TheBridge\command\subcommands;
+namespace bofoiii\TheBridge\command\subcommands;
 
 use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\BaseSubCommand;
@@ -9,8 +9,8 @@ use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
-use SandhyR\TheBridge\game\Game;
-use SandhyR\TheBridge\TheBridge;
+use bofoiii\TheBridge\game\Game;
+use bofoiii\TheBridge\TheBridge;
 
 class QuitSubCommand extends BaseSubCommand{
 

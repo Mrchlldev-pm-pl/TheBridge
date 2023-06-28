@@ -1,7 +1,8 @@
 <?php
 
-namespace SandhyR\TheBridge\utils;
+namespace bofoiii\TheBridge\utils;
 
+use pocketmine\block\utils\DyeColor;
 use pocketmine\math\Vector3;
 use pocketmine\color\Color;
 use pocketmine\Server;
@@ -54,6 +55,18 @@ class Utils{
         ];
 
         return $meta[$team];
+    }
+
+    public static function teamToDyeColor(string $team): DyeColor
+    {
+        if ($team == "blue") {
+            return DyeColor::BLUE();
+        }
+
+        if ($team == "red") {
+            return DyeColor::RED();
+        }
+        return DyeColor::WHITE();
     }
 
     /**

@@ -1,9 +1,13 @@
 name: TheBridge
-main: SandhyR\TheBridge\TheBridge
-author: SandhyR
-api: 4.0.0
+main: bofoiii\TheBridge\TheBridge
+author:
+  - ShandyR
+  - BOFOII
+api: 5.0.0
 version: 1.0
 
 permissions:
+  thebridge.permission.cmd:
+    default: true
   thebridge.set:
     default: op
